@@ -6,6 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Graduation Invitation 🎓</title>
 
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:title" content="Graduation Invitation 🎓 – Laiba Shabbir">
+  <meta property="og:description" content="Please join me in celebrating my graduation from ELTE University.">
+  <meta property="og:image" content="https://invite-delta-three.vercel.app/images/Cap.jpg">
+  <meta property="og:url" content="https://invite-delta-three.vercel.app/">
+  <meta property="og:type" content="website">
+
+  <!-- Optional but recommended -->
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -252,7 +263,8 @@
         width: 100%;
       }
 
-      .actions input[type="text"], .actions .btn {
+      .actions input[type="text"],
+      .actions .btn {
         width: 100%;
       }
 
@@ -328,13 +340,14 @@
     </div>
 
     <!-- FORM RSVP -->
-    <div class="actions fade-in">
-      <form action="https://formspree.io/f/mbdapbvk" method="POST">
-        <input type="text" name="name" placeholder="Your Full Name" required
-          style="padding:10px 14px; border-radius:8px; border:1px solid var(--border); font-family:'JetBrains Mono', monospace;">
-        <button type="submit" class="btn">RSVP</button>
-      </form>
-    </div>
+    <form action="https://formspree.io/f/mbdapbvk" method="POST">
+      <input type="hidden" name="_next" value="https://invite-delta-three.vercel.app/thanks.html">
+
+      <input type="text" name="name" placeholder="Your Full Name" required
+        style="padding:10px 14px; border-radius:8px; border:1px solid var(--border); font-family:'JetBrains Mono', monospace;">
+
+      <button type="submit" class="btn">RSVP</button>
+    </form>
 
     <footer class="fade-in">
       <span style="font-weight:600; font-size:14px;">Laiba Shabbir</span><br>
