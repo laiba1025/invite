@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graduation Invitation 🎓</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --card: #0f1429;
+      --border: rgba(255, 255, 255, .12);
+      --text: rgba(255, 255, 255, .92);
+      --muted: rgba(255, 255, 255, .75);
+      --accent: #7CFFB2;
+      --accent2: #67A6FF;
+      --radius: 18px;
+    }
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(rgba(7, 10, 20, 0.85), rgba(7, 10, 20, 0.85)),
+        url("images/Diploma.jpg") center/cover no-repeat fixed;
+      overflow-x: hidden;
+    }
+
+    /* CARD */
+    .card {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(15, 20, 41, 0.5);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: 0 16px 60px rgba(0, 0, 0, .6);
+      position: relative;
+      z-index: 1;
+      transform: translateY(0);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .7);
+    }
+
+    /* TEXT */
+    .hello {
+      color: var(--accent);
+      font-size: 18px;
+      /* increased from 14px */
+      font-weight: 600;
+      text-align: center;
+      /* centers the text horizontally */
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      margin: 22px 0 28px;
+      border-radius: 2px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .highlight {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* TERMINAL */
+    .terminal {
+      margin: 26px 0 30px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #0a0e1f;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 90px;
+      white-space: pre-wrap;
+    }
+
+    .prompt {
+      color: var(--accent);
+    }
+
+    .ok {
+      color: #49ebb0;
+      font-weight: 600;
+    }
+
+    /* Bright green for success line */
+
+    /* PHOTO GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 28px 0 32px;
+    }
+
+    .photo {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #0a0e1f;
+      transition: .5s ease;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(40%) brightness(.9);
+      transform: scale(1);
+      transition: all .45s ease;
+    }
+
+    .photo:hover img {
+      transform: scale(1.08) rotate(1deg);
+      filter: grayscale(0%) brightness(1.05);
+    }
+
+    .photo:hover {
+      box-shadow: 0 0 0 1px rgba(124, 255, 178, .4),
+        0 0 22px rgba(124, 255, 178, .25);
+      transform: translateY(-4px);
+    }
+
+    /* DETAILS */
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .value {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .details .item:last-child {
+      grid-column: 1 / -1;
+    }
+
+    /* RSVP BUTTON */
+    .actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .actions form {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: auto;
+    }
+
+    .actions input[type="text"] {
+      margin: 0;
+      flex: 1 1 auto;
+      min-width: 140px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border: 1px solid rgba(124, 255, 178, .4);
+      background: rgba(124, 255, 178, .12);
+      color: var(--text);
+      padding: 12px 26px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(124, 255, 178, .22);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* SCROLL FADE-IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width:640px) {
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .actions form {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .actions input[type="text"], .actions .btn {
+        width: 100%;
+      }
+
+      /* adjust padding for smaller screens */
+      .card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+
+    <div class="hello fade-in">"Hello, World!"</div>
+
+    <p class="highlight fade-in">
+      Today, I (Laiba Shabbir) am proud to share that I have graduated with a
+      Bachelor of Science in Computer Science
+      from Eötvös Loránd University <br>
+      (ELTE) 🎓
+    </p>
+
+    <p class="fade-in">
+      This achievement is not mine alone.
+      It was made possible by the constant support, prayers,
+      and encouragement of my family, friends, and mentors.
+    </p>
+
+    <div class="divider fade-in"></div>
+
+    <!-- PHOTO GALLERY -->
+    <div class="gallery fade-in">
+      <div class="photo"><img src="images/Gloves.png" alt="Graduation Cap"></div>
+      <div class="photo"><img src="images/Uni.jpg" alt="University"></div>
+    </div>
+
+    <!-- TERMINAL WITH TYPING EFFECT -->
+    <div class="terminal fade-in" id="terminal"></div>
+
+    <!-- DETAILS -->
+    <div class="details fade-in">
+      <div class="item">
+        <div class="label">DATE</div>
+        <div class="value">Friday, February 27, 2026</div>
+      </div>
+
+      <div class="item">
+        <div class="label">TIME</div>
+        <div class="value">10:00 AM</div>
+      </div>
+
+      <div class="item">
+        <div class="label">VENUE</div>
+        <div class="value">
+          <a href="https://www.google.com/maps/search/?api=1&query=Budapest,+Pázmány+Péter+stny.+1/C,+1117"
+            target="_blank" style="color:var(--text); text-decoration:underline;">
+            Budapest, Pázmány Péter stny. 1/C, 1117
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="fade-in" font-size:13px>
+      I would be truly honored to celebrate this special milestone with you.<br>
+    </p>
+
+    <div class="center-message fade-in">
+      <p style="text-align:center; font-size:13px; line-height:1.6;">
+        Please join me in my graduation ceremony.
+      </p>
+    </div>
+
+    <!-- FORM RSVP -->
+    <div class="actions fade-in">
+      <form action="https://formspree.io/f/mbdapbvk" method="POST">
+        <input type="text" name="name" placeholder="Your Full Name" required
+          style="padding:10px 14px; border-radius:8px; border:1px solid var(--border); font-family:'JetBrains Mono', monospace;">
+        <button type="submit" class="btn">RSVP</button>
+      </form>
+    </div>
+
+    <footer class="fade-in">
+      <span style="font-weight:600; font-size:14px;">Laiba Shabbir</span><br>
+      Built with patience, perseverance, and a lot of learning 🎓
+    </footer>
+
+  </main>
+
+  <script>
+    // SCROLL TO TOP ON PAGE LOAD
+    window.scrollTo(0, 0);
+
+    // TERMINAL TYPING
+    const terminal = document.getElementById('terminal');
+    const commands = [
+      "$ ./journey.sh",
+      "> status: completed",
+      "> degree: BSc Computer Science",
+      "✔ graduation successful"
+    ];
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeLine() {
+      if (lineIndex < commands.length) {
+        const line = commands[lineIndex];
+        let spanStart = "";
+        let spanEnd = "";
+
+        // Make last line green
+        if (lineIndex === commands.length - 1) {
+          spanStart = "<span class='ok'>";
+          spanEnd = "</span>";
+        }
+
+        if (charIndex < line.length) {
+          terminal.innerHTML += line[charIndex];
+          charIndex++;
+          setTimeout(typeLine, 50);
+        } else {
+          if (lineIndex === commands.length - 1) {
+            const typedLine = terminal.innerHTML;
+            const lastLineIndex = typedLine.lastIndexOf("✔ graduation successful");
+            terminal.innerHTML = typedLine.slice(0, lastLineIndex) + spanStart + "✔ graduation successful" + spanEnd;
+          }
+          terminal.innerHTML += "<br>";
+          lineIndex++;
+          charIndex = 0;
+          setTimeout(typeLine, 300);
+        }
+      }
+    }
+
+    typeLine();
+
+    // FADE-IN SCROLL
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.1 };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // CARD transparency is handled in CSS; no JavaScript required
+  </script>
+
+</body>
+
+</html>
